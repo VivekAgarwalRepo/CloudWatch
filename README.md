@@ -1,11 +1,11 @@
 
 
-# MongoLoginApplication
+#CloudWatch
 
 
 
 ## Usage
-
+Provides a virtual wireless sensor network deployment on cloud and an admin dashboard to monitor weather report in a given area.
 
 
 ## Developing
