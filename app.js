@@ -40,7 +40,13 @@ if ('development' === app.get('env')) {
 }
 
 //GET Requests
-app.get('/', routes.index);
+
+app.get('/', function (req,res) {
+	res.render('home');
+});
+app.get('/setcurrentlocation',user.setcurrentlocation);
+app.get('/getweather',user.getweather);
+app.get('/showweather',user.showweather);
 app.get('/users', user.list);
 app.get('/admin',admin.signin);
 app.post('/dashboard',admin.dashboard);
