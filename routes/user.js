@@ -35,7 +35,7 @@ exports.getweather= function(req,res){
 	var query= "SELECT * FROM sensor_register WHERE sensor_x between '"+lowerlat+"' AND '"+upperlat+"' OR sensor_y between '"+lowerlong+"' AND '"+ upperlong+"' ;";
 	var items;
 	console.log(query);
-	mysql.fetchData(function(err,result){
+	mysql.get(function(err,result){
 		if(err){
 			throw err;
 		}
@@ -61,14 +61,17 @@ exports.getweather= function(req,res){
 			response.location= location;
 			var query1= "SELECT * FROM testtable WHERE sensor_id= '"+items[minpos].sensor_id+"';";
 			console.log(query);
-			mysql.fetchData(function (err,result) {
+			mysql.get(function (err,result) {
 				if(err){
 					throw err;
 				}
 				else{
 					console.dir(result);
-					temp= result[0].sensor_temp;
-					humidity= result[0].sensor_humidity;
+					var size= result.length;
+					size=size-1;
+					console.log("size="+size);
+					temp= result[size].sensor_temp;
+					humidity= result[size].sensor_humidity;
 					response.temp= temp;
 					response.humidity= humidity;
 					console.log(response);
