@@ -1,7 +1,6 @@
 var ejs= require('ejs');
 var mysql = require('mysql');
 var pool= require('./pool');
-
 	
 var pooler= pool.onGetConnection();
 

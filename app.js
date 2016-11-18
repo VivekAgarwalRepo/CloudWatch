@@ -11,11 +11,11 @@ var express = require('express')
 var path = require('path');
 var admin = require('./routes/admin');
 
-
+//Sample
 var app = express();
 
 //all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || 3041);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -49,7 +49,7 @@ app.get('/logout',admin.logout);
 app.post('/createSensor',admin.createSensor);
 app.get('/active',admin.active);
 app.post('/search',admin.search);
-
+app.get('/fill',admin.enterVals);
 
 	http.createServer(app).listen(app.get('port'), function(){
 		console.log('Express server listening on port ' + app.get('port'));

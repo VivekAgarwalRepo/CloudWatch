@@ -1,4 +1,4 @@
-var mysql = require('mysql');
+
 var mysql1= require('./mysql');
 
 exports.signin = function(req, res){
@@ -86,6 +86,7 @@ exports.active = function(req, res){
 	var sensor_name,latitude,longitude,sensor_location,timestamp,sensor_type;
 	var flag="Yes";
 	var query= "SELECT * FROM sensor_register WHERE sensor_active='"+flag+"';";
+
 	mysql1.get(function(err,records){
 		if(err){
 			throw err;
@@ -101,6 +102,27 @@ exports.active = function(req, res){
 
 };
 
+exports.enterVals=function (req,res) {
+	var id=req.param("sensor_id");
+	var temp=req.param("sensor_temp");
+	var humid=req.param("sensor_humidity");
+
+	console.log("id :"+id+" temp :"+temp+" humidity :"+humid);
+
+	var query= "Insert into testtable(sensor_id,sensor_temp,sensor_humidity) values ("+id+","+temp+","+humid+");";
+	mysql1.get(function(err,records){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			res.send(records);
+
+		}
+
+	},query);
+
+}
 
 exports.search = function(req, res){
 	console.log("inside search");
