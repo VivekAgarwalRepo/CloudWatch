@@ -27,12 +27,9 @@ exports.createSensor = function(req,res)
 	var active=req.param("active");
 	var type=req.param("type");
 	var currentdate = new Date(); 
-	var datetime = currentdate.getDate() + "/"
-	                + (currentdate.getMonth()+1)  + "/" 
-	                + currentdate.getFullYear() + " @ "  
-	                + currentdate.getHours() + ":"  
-	                + currentdate.getMinutes();
+	var datetime = new Date (Date.now());
 
+	new Date(Date.now)
 	    console.log("Timestamp:"+datetime);
 	var query= "insert into sensor_register (sensor_name,sensor_x,sensor_y,sensor_location,sensor_active,sensor_timestamp,sensor_type) VALUES ('"+sensor_name+"','"+latitude+"','"+longitude+"','"+location+"','"+active+"','"+datetime+"','"+type+"');";
 	mysql1.add(function(err,res){
