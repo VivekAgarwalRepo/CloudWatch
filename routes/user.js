@@ -14,6 +14,7 @@ exports.setcurrentlocation= function (req,res) {
 };
 
 exports.getweather= function(req,res){
+	// res.set('Access-Control-Allow-Origin', '*');
 	var latitude= req.param('latitude');
 		var longitude= req.param('longitude');
 		console.log(latitude+","+longitude);
