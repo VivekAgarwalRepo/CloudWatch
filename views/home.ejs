@@ -13,15 +13,15 @@
 function getLoc() {
   console.log("in here");
     if (navigator.geolocation) {
-        document.getElementById("demo").innerHTML = "loading..";
+        document.getElementById("demo1").innerHTML = "loading..";
         navigator.geolocation.getCurrentPosition(posselect);
     } else {
-        document.getElementById("demo").innerHTML = "Geolocation is not supported by this browser.";
+        document.getElementById("demo1").innerHTML = "Geolocation is not supported by this browser.";
     }
 }
 
 function posselect(position) {
-    document.getElementById("demo").innerHTML = "loading..";
+    document.getElementById("demo1").innerHTML = "loading..";
 
     var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
@@ -29,9 +29,9 @@ function posselect(position) {
       console.log("in here");
       var jsonobj= JSON.parse(this.responseText);
       console.log(typeof(jsonobj))
-     document.getElementById("demo").innerHTML= jsonobj.location;
-     document.getElementById("demo1").innerHTML= jsonobj.temp;
-     document.getElementById("demo2").innerHTML= jsonobj.humidity;
+     document.getElementById("demo1").innerHTML= jsonobj.location;
+     document.getElementById("demo2").innerHTML= jsonobj.temp;
+     document.getElementById("demo3").innerHTML= jsonobj.humidity;
 
     }
   };
