@@ -51,6 +51,7 @@ app.get('/', function (req,res) {
 });
 app.get('/setcurrentlocation',user.setcurrentlocation);
 app.get('/getweather',user.getweather);
+app.get('/getweatherbyloc',user.getweatherbyloc);
 app.get('/showweather',user.showweather);
 app.get('/users', user.list);
 app.get('/admin',admin.signin);

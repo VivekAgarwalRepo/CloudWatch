@@ -14,7 +14,7 @@ exports.setcurrentlocation= function (req,res) {
 };
 
 exports.getweather= function(req,res){
-	// res.set('Access-Control-Allow-Origin', '*');
+	res.set('Access-Control-Allow-Origin', '*');
 	var latitude= req.param('latitude');
 		var longitude= req.param('longitude');
 		console.log(latitude+","+longitude);
@@ -86,4 +86,44 @@ exports.getweather= function(req,res){
 exports.showweather= function (req,res) {
 	var weather = req.param('weather');
 	res.render('weather_disp',{weather:weather});
+};
+
+exports.getweatherbyloc= function (req,res) {
+	res.set('Access-Control-Allow-Origin', '*');
+	var location = req.param('location');
+	console.log("location="+location);
+	var query= "SELECT * FROM sensor_register WHERE sensor_location like '%"+location+"%';"
+	var items;
+	console.log(query);
+	mysql.get(function(err,result){
+		if(err){
+			throw err;
+		}
+		else{
+			console.log("result= "+result);
+			items= result;
+			response.location= location;
+			console.log(items.sensor_id);
+			var query1= "SELECT * FROM testtable WHERE sensor_id= '"+items.sensor_id+"';";
+			console.log(query1);
+			mysql.get(function (err,result) {
+				if(err){
+					throw err;
+				}
+				else{
+					console.dir(result);
+					var size= result.length;
+					size=size-1;
+					console.log("size="+size);
+					temp= result[size].sensor_temp;
+					humidity= result[size].sensor_humidity;
+					response.temp= temp;
+					response.humidity= humidity;
+					console.log(response);
+					res.send(response);
+				}
+			},query1);
+			}
+	},query);
+
 };
