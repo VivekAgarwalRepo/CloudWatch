@@ -26,8 +26,13 @@ exports.createSensor = function(req,res)
 	var location=req.param("location");
 	var active=req.param("active");
 	var type=req.param("type");
-	var currentdate = new Date(); 
-	var datetime = new Date (Date.now());
+	var currentdate = new Date();
+    var currentdate = new Date();
+    var datetime = currentdate.getDate() + "/"
+        + (currentdate.getMonth()+1)  + "/"
+        + currentdate.getFullYear() + " @ "
+        + currentdate.getHours() + ":"
+        + currentdate.getMinutes();
 
 	new Date(Date.now)
 	    console.log("Timestamp:"+datetime);
