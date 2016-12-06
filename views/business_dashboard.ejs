@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.8/angular-ui-router.min.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.min.js"></script>
+    <script src="angularjs/login.js"></script>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-animate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-aria.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-messages.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.js"></script>
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+
+
+<body ng-app="login" >
+
+<div id="header"></div>
+<script type="text/javascript" src="./js/business_header.js"></script>
+
+
+
+
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+ 
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align:center;">Search</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/search" method="post">
+          <div class="input-group">
+            <span class="input-group-addon" id="search"> <i class="fa fa-search"></i></span>
+          <input type="text" name="search" placeholder="Search" class="form-control" required> 
+        </div>
+        <br /> <br />
+        <input type="submit" value="Search" class="btn btn-info center-block" style="background: #1abc9c; width=150px;">
+      </form>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+<div class="col-md-9 col-md-offset-3" >
+    <div class="col-md-12 "  ng-controller="line" style="margin-top: 15px">
+
+
+        <md-card>
+            <md-card-header>
+                <canvas id="line" class="chart chart-line" chart-data="data"
+                        chart-labels="labels" chart-series="series" chart-options="options"
+                        chart-dataset-override="datasetOverride" chart-click="onClick">
+                </canvas>
+            </md-card-header>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline" align="center">Temperature comparision of all cities</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+
+
+
+    </div>
+
+
+    <div class="col-md-12" ng-controller="bargraph" style="margin-top: 150px">
+
+
+        <md-card>
+            <md-card-header>
+                <canvas id="mycanvas" style="width: 500px;height: 300px"></canvas>
+
+            </md-card-header>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline" align="center">Average temperature comparision</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+
+
+    </div>
+
+
+
+    <div class="col-md-12"  ng-controller="pie" style="margin-top: 150px">
+
+
+        <md-card>
+            <md-card-header>
+                <canvas id="Polar" style="width: 500px;height: 300px"></canvas>
+            </md-card-header>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline" align="center">Average temperature comparision</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+
+    </div>
+
+
+    <div class="col-md-12" ng-controller="density" style="margin-top: 150px">
+        <md-card>
+            <md-card-header>
+                <canvas id="bubbles" style="width: 500px;height: 300px"></canvas>
+            </md-card-header>
+            <md-card-title>
+                <md-card-title-text>
+                    <span class="md-headline" align="center">Min-Max Temperature Comparision</span>
+                </md-card-title-text>
+            </md-card-title>
+
+        </md-card>
+
+
+    </div>
+
+
+<div class="col-md-12 "  ng-controller="web" style="margin-top: 160px">
+    <md-card>
+        <md-card-header>
+            <canvas id="Radar" style="width: 500px;height: 300px"></canvas>
+        </md-card-header>
+        <md-card-title>
+            <md-card-title-text>
+                <span class="md-headline" align="center">Change in temperature</span>
+            </md-card-title-text>
+        </md-card-title>
+
+    </md-card>
+
+</div>
+
+
+</div>
+  </body>
+</html>

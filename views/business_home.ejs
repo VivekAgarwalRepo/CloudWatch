@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
+    <script src="cordova.js"></script>
+  </head>
+
+    <script>
+function getLoc() {
+  console.log("in here");
+    if (navigator.geolocation) {
+        document.getElementById("demo1").innerHTML = "loading..";
+        navigator.geolocation.getCurrentPosition(posselect);
+    } else {
+        document.getElementById("demo1").innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function posselect(position) {
+    document.getElementById("demo1").innerHTML = "loading..";
+
+    var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      console.log("in here");
+      var jsonobj= JSON.parse(this.responseText);
+      console.log(typeof(jsonobj))
+     document.getElementById("demo1").innerHTML= jsonobj.location;
+     document.getElementById("demo2").innerHTML= jsonobj.temp;
+     document.getElementById("demo3").innerHTML= jsonobj.humidity;
+
+    }
+  };
+  xhttp.open("GET", "/getweather?latitude="+position.coords.latitude+"&longitude="+position.coords.longitude, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
+}
+</script>
+
+  </head>
+  <body ng-app="starter" onload="getLoc()">
+  <input type="text" name="searchbox">
+  <div id="demo"></div>
+    <div id="demo1"></div>
+    <div id="demo2"></div>
+
+  </body>
+</html>

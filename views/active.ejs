@@ -155,29 +155,38 @@ color: #fff;
 </style> </head>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
+    <div id="header"></div>
+<script type="text/javascript" src="./js/header.js"></script>
 <div class="main">
+
 <div class="container-fluid">
 
 <h3 style="text-align:center;"> List of Active Sensors </h3> <hr /> <br />
 <div class="table">
   <table class="table table-striped table-hover" style="width:100%">
   <tr>
+    <th>ID</th>
     <th>Name</th>
     <th>Latitude</th> 
     <th>Longitude</th>
     <th>Location</th>
     <th>Type</th> 
     <th>Timestamp</th>
+    <th></th>
   </tr>
 <% for(var i=0;i<rec.length;i++) {%>
   <tr>
-
+    <% var url="/delete_sensor?sensor_id="+rec[i].sensor_id; %>
+    <% var url1="/update_sensor?sensor_id="+rec[i].sensor_id; %>
+    <td><%= rec[i].sensor_id %></td>
     <td><%= rec[i].sensor_name %></td>
     <td><%= rec[i].sensor_x %></td> 
     <td><%= rec[i].sensor_y %></td>
   <td><%= rec[i].sensor_location %></td>
     <td><%= rec[i].sensor_type %></td> 
     <td><%= rec[i].sensor_timestamp %></td>
+    <td><a href= <%= url1 %>><i class="fa fa-refresh fa-lg" aria-hidden="true"></i></a></td>
+    <td><a href= <%= url %>><i class="fa fa-trash-o fa-lg" aria-hidden="true"></i></a></td>
   </tr>
   <% } %>
 </table>
@@ -190,55 +199,7 @@ color: #fff;
 </div>
 </div>
  
-<div class="nav-side-menu">
-    <div class="brand"><h6>Welcome, </h6></div>
-<div>&nbsp &nbsp<span class="glyphicon glyphicon-user"> </span>&nbsp &nbsp &nbsp &nbsp <%= first %> <%= last %>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-  
-        <div class="menu-list">
-  
-            <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                  <a href="/home">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                  </a>
-                </li>
 
-                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  <a href="#myModal" data-toggle="modal"><i class="fa fa-gift fa-lg"></i> Create Sensor </a>
-                </li>
-                
-
-
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="#"><i class="fa fa-check fa-lg"></i> Active Sensors </a>
-                </li>  
-                 
-
-
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Location</a>
-                </li>
-                
-
-
-                 <li>
-                  <a href="#myModal1" data-toggle="modal">
-                  <i class="fa fa-search"></i> Search
-                  </a>
-                  </li>
-
-                 <li>
-                  <a href="/logout">
-                  <i class="fa fa-sign-out"></i> Logout
-                  </a>
-                </li>
-            </ul>
-     </div>
-     
-</div>
-
-</div>
 
       
 
@@ -247,7 +208,7 @@ color: #fff;
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
-      <!-- Modal content-->
+ 
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -259,15 +220,16 @@ color: #fff;
 <div class="input-group">
             <span class="input-group-addon" id="sensor_name"><b>Sensor Name</b></span><input type="text" name="sensor_name" placeholder="Sensor Name" class="form-control" required> <br />
 </div> <br />
-<div class="input-group">
-            <span class="input-group-addon" id="latitude" ><b>Latitude</b></span>
-            <input type="text" name="latitude" placeholder="Latitude" class="form-control" required>  </div><br />
-<div class="input-group">
-            <span class="input-group-addon" id="longitude"><b>Longitude</b></span>
-             <input type="text" name="longitude" placeholder="Longitude" class="form-control" required> <br /></div><br />
+
 <div class="input-group">
             <span class="input-group-addon" id="location"><b>Location</b></span>
              <input type="text" name="location" placeholder="Location" class="form-control" required> <br /></div><br />
+
+<div class="input-group">
+            <span class="input-group-addon" id="location"><b>City</b></span>
+             <input type="text" name="city" placeholder="City" class="form-control" required> <br /></div><br />
+
+
 <div class="input-group">
             <span class="input-group-addon" id="active"><b>Active</b></span>
              <select name="active" class="form-control" required>
@@ -312,6 +274,6 @@ color: #fff;
     </div>
   </div>
   
-</div>
+</div> 
   </body>
 </html>

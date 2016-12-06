@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <h1><%= title %></h1>
+ <h1>Success</h1>
  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -150,57 +150,10 @@ body {
 </style> </head>
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 <body>
+<div id="header"></div>
+<script type="text/javascript" src="./js/header.js"></script>
 
 
-<div class="nav-side-menu">
-    <div class="brand"><h6>Welcome, </h6></div>
-<div>&nbsp &nbsp<span class="glyphicon glyphicon-user"> </span>&nbsp &nbsp &nbsp &nbsp <%= first %> <%= last %>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-  
-        <div class="menu-list">
-  
-            <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                  <a href="/home">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                  </a>
-                </li>
-
-                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  <a href="#myModal" data-toggle="modal"><i class="fa fa-gift fa-lg"></i> Create Sensor </a>
-                </li>
-                
-
-
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="/active"><i class="fa fa-check fa-lg"></i> Active Sensors </a>
-                </li>  
-                 
-
-
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Location</a>
-                </li>
-                
-
-
-                 <li>
-                  <a href="#myModal1" data-toggle="modal">
-                  <i class="fa fa-search"></i> Search
-                  </a>
-                  </li>
-
-                 <li>
-                  <a href="/logout">
-                  <i class="fa fa-sign-out"></i> Logout
-                  </a>
-                </li>
-            </ul>
-     </div>
-     
-</div>
-
-</div>
 
 <div class="alert alert-success">
 &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
@@ -221,15 +174,16 @@ body {
 <div class="input-group">
             <span class="input-group-addon" id="sensor_name"><b>Sensor Name</b></span><input type="text" name="sensor_name" placeholder="Sensor Name" class="form-control" required> <br />
 </div> <br />
-<div class="input-group">
-            <span class="input-group-addon" id="latitude" ><b>Latitude</b></span>
-            <input type="text" name="latitude" placeholder="Latitude" class="form-control" required>  </div><br />
-<div class="input-group">
-            <span class="input-group-addon" id="longitude"><b>Longitude</b></span>
-             <input type="text" name="longitude" placeholder="Longitude" class="form-control" required> <br /></div><br />
+
+           
 <div class="input-group">
             <span class="input-group-addon" id="location"><b>Location</b></span>
              <input type="text" name="location" placeholder="Location" class="form-control" required> <br /></div><br />
+
+             <div class="input-group">
+            <span class="input-group-addon" id="location"><b>City</b></span>
+             <input type="text" name="city" placeholder="City" class="form-control" required> <br /></div><br />
+
 <div class="input-group">
             <span class="input-group-addon" id="active"><b>Active</b></span>
              <select name="active" class="form-control" required>

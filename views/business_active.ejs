@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <h1><%= title %></h1>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+ </head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<body>
+    <div id="header"></div>
+<script type="text/javascript" src="./js/business_header.js"></script>
+<div class="main">
+
+<div class="container-fluid">
+
+<h3 style="text-align:center;"> List of Active Sensors </h3> <hr /> <br />
+<div class="table">
+  <table class="table table-striped table-hover" style="width:100%">
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Latitude</th> 
+    <th>Longitude</th>
+    <th>Location</th>
+    <th>Type</th> 
+    <th>Timestamp</th>
+    <th></th>
+  </tr>
+<% for(var i=0;i<rec.length;i++) {%>
+  <tr>
+    <% var url="/delete_sensor?sensor_id="+rec[i].sensor_id; %>
+    <% var url1="/update_sensor?sensor_id="+rec[i].sensor_id; %>
+    <td><%= rec[i].sensor_id %></td>
+    <td><%= rec[i].sensor_name %></td>
+    <td><%= rec[i].sensor_x %></td> 
+    <td><%= rec[i].sensor_y %></td>
+  <td><%= rec[i].sensor_location %></td>
+    <td><%= rec[i].sensor_type %></td> 
+    <td><%= rec[i].sensor_timestamp %></td>
+  </tr>
+  <% } %>
+</table>
+  
+    
+  
+  
+</div>
+
+</div>
+</div>
+ 
+
+
+      
+
+
+
+
+
+
+  
+</div>
+  </body>
+</html>

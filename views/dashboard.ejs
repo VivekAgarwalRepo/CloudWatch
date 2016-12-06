@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- <h1><%= title %></h1>
+
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
@@ -11,6 +11,16 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.min.js"></script>
     <script src="angularjs/login.js"></script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.3.0/Chart.bundle.min.js"></script>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link rel="stylesheet"
+          href="bower_components/chartist/dist/chartist.min.css">
+             <link rel="stylesheet" href="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.css">
+    <script src="//cdn.jsdelivr.net/chartist.js/latest/chartist.min.js"></script>
+
+
 <style>
 .nav-side-menu {
   overflow: auto;
@@ -41,7 +51,6 @@
   margin: 0px;
   line-height: 35px;
   cursor: pointer;
-
 }
 .nav-side-menu ul :not(collapsed) .arrow:before,
 .nav-side-menu li :not(collapsed) .arrow:before {
@@ -95,7 +104,6 @@
 .nav-side-menu li a {
   text-decoration: none;
   color: #e1ffff;
-
 }
 .nav-side-menu li a i {
   padding-left: 10px;
@@ -145,14 +153,10 @@
 body {
   margin: 0px;
   padding: 0px;
-
-
 }
 .glyphicon {
     font-size: 25px;
 }
-
-
 </style>
     <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/angular_material/1.0.0/angular-material.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -167,54 +171,13 @@ body {
 
 
 <body ng-app="login" >
-<div class="nav-side-menu">
-    <div class="brand"><h6>Welcome, </h6></div>
-<div>&nbsp &nbsp<span class="glyphicon glyphicon-user"> </span>&nbsp &nbsp &nbsp &nbsp <%= first %> <%= last %>
-    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
-  
-        <div class="menu-list">
-  
-            <ul id="menu-content" class="menu-content collapse out">
-                <li>
-                  <a href="/home">
-                  <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                  </a>
-                </li>
 
-                <li  data-toggle="collapse" data-target="#products" class="collapsed active">
-                  <a href="#myModal" data-toggle="modal"><i class="fa fa-gift fa-lg"></i> Create Sensor </a>
-                </li>
-                
+<div id="header"></div>
+<script type="text/javascript" src="./js/header.js"></script>
 
 
-                <li data-toggle="collapse" data-target="#service" class="collapsed">
-                  <a href="/active"><i class="fa fa-check fa-lg"></i> Active Sensors </a>
-                </li>  
-                 
 
 
-                <li data-toggle="collapse" data-target="#new" class="collapsed">
-                  <a href="#"><i class="fa fa-globe fa-lg"></i> Location</a>
-                </li>
-                
-
-
-                 <li>
-                  <a href="#myModal1" data-toggle="modal">
-                  <i class="fa fa-search"></i> Search
-                  </a>
-                  </li>
-
-                 <li>
-                  <a href="/logout">
-                  <i class="fa fa-sign-out"></i> Logout
-                  </a>
-                </li>
-            </ul>
-     </div>
-     
-</div>
-</div>
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
     
@@ -230,15 +193,16 @@ body {
 <div class="input-group">
             <span class="input-group-addon" id="sensor_name"><b>Sensor Name</b></span><input type="text" name="sensor_name" placeholder="Sensor Name" class="form-control" required> <br />
 </div> <br />
-<div class="input-group">
-            <span class="input-group-addon" id="latitude" ><b>Latitude</b></span>
-            <input type="text" name="latitude" placeholder="Latitude" class="form-control" required>  </div><br />
-<div class="input-group">
-            <span class="input-group-addon" id="longitude"><b>Longitude</b></span>
-             <input type="text" name="longitude" placeholder="Longitude" class="form-control" required> <br /></div><br />
+
+            
 <div class="input-group">
             <span class="input-group-addon" id="location"><b>Location</b></span>
              <input type="text" name="location" placeholder="Location" class="form-control" required> <br /></div><br />
+
+             <div class="input-group">
+            <span class="input-group-addon" id="location"><b>City</b></span>
+             <input type="text" name="city" placeholder="City" class="form-control" required> <br /></div><br />
+
 <div class="input-group">
             <span class="input-group-addon" id="active"><b>Active</b></span>
              <select name="active" class="form-control" required>
@@ -248,7 +212,7 @@ body {
 <div class="input-group">
             <span class="input-group-addon" id="type"><b>Sensor Type</b></span>
              <input type="text" name="type" placeholder="Sensor Type" class="form-control" required> <br /> </div><br />
-            <input type="submit" value="Create" class="btn btn-info center-block" style="background: #1abc9c; width=80px;">
+            <input type="submit" value="Create" class="btn btn-info center-block" style="background: #1abc9c; width:80px;">
         </div> </form>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -275,7 +239,7 @@ body {
           <input type="text" name="search" placeholder="Search" class="form-control" required> 
         </div>
         <br /> <br />
-        <input type="submit" value="Search" class="btn btn-info center-block" style="background: #1abc9c; width=150px;">
+        <input type="submit" value="Search" class="btn btn-info center-block" style="background: #1abc9c; width:150px;">
       </form>
       </div>
       
@@ -285,102 +249,325 @@ body {
 </div>
 
 
-<div class="col-md-9 col-md-offset-3" >
-    <div class="col-md-12 "  ng-controller="line" style="margin-top: 15px">
 
 
-        <md-card>
-            <md-card-header>
-                <canvas id="line" class="chart chart-line" chart-data="data"
-                        chart-labels="labels" chart-series="series" chart-options="options"
-                        chart-dataset-override="datasetOverride" chart-click="onClick">
-                </canvas>
-            </md-card-header>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline" align="center">Temperature comparision of all cities</span>
-                </md-card-title-text>
-            </md-card-title>
 
-        </md-card>
+<div class="row">
+<div class="col-md-4 col-md-offset-3" >
+  <div class="graph1 well" style="width:320px;height:320px;">
+    <div class="col-md-12 "  style="margin-top: 15px">
+<canvas id="myChart" width="200" height="200"></canvas>
+<script>
+var ctx = document.getElementById("myChart");
+var myChart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+        labels: [<% for(i in records1){ %>
+                                   "<%- records1[i].sensor_type %>",
+                                <%  } %>],
+        datasets: [{
+            label: 'Types of Sensors',
+            data: [<% for(i in records1){ %>
+                                   "<%- records1[i].tot %>",
+                                <%  } %>],
+            backgroundColor: [
+                '#FFFF00',
+                '#DC143C',
+                
+                '#4169E1'
+
+            ],
+            
+            borderWidth: 1
+        }]
+    },
+ 
+});
+</script>
+
+
+
+
+    </div>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-align:center;"><b>Types of Sensors Present</b></span>
+  </div>
+
+</div>
+
+<div style="float:right;padding-right:3cm;" >
+  <div class="graph1 well" style="width:320px;height:320px;">
+    <div class="col-md-12 "  style="margin-top: 15px">
+<canvas id="myChart1" width="200" height="200"></canvas>
+<script>
+var ctx1 = document.getElementById("myChart1");
+var myChart1 = new Chart(ctx1, {
+    type: 'doughnut',
+    data: {
+        labels: [<% for(i in records2){ %>
+                                   "<%- records2[i].sensor_active %>",
+                                <%  } %>],
+        datasets: [{
+            label: 'Sensor Active Status',
+            data: [<% for(i in records2){ %>
+                                   "<%- records2[i].active %>",
+                                <%  } %>],
+            backgroundColor: [
+            '#00aeef',
+            
+                
+                
+                
+                '#4169E1'
+
+            ],
+            
+            borderWidth: 1
+        }]
+    },
+ 
+});
+</script>
+
 
 
 
     </div>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-align:center;"><b>Sensor Active Status</b></span>
+  </div>
+<br /><br />
+</div>
+
+</div>
+
+<div class="row">
+
+<div class="col-md-4 col-md-offset-3" >
+  <div class="graph1 well" style="width:320px;height:320px;">
+    <div class="col-md-12 "  style="margin-top: 15px">
+<canvas id="myChart2" width="200" height="200"></canvas>
+<script>
+var ctx2 = document.getElementById("myChart2");
+var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: [<% for(i in records3){ %>
+                                   "<%- records3[i].city %>",
+                                <%  } %>],
+        datasets: [{
+            label: 'Types of Sensors',
+            data: [<% for(i in records3){ %>
+                                   "<%- records3[i].city_count %>",
+                                <%  } %>],
+            backgroundColor: [
+                "#4682B4",
+                "#2E8B57",
+                  "#FF6347",
+               "#C71585",
+                "#00275e",
+                "#feb729",
+               
+                "#000000"
+
+            ],
+            
+            borderWidth: 1
+        }]
+    },
+ 
+});
+</script>
 
 
-    <div class="col-md-12" ng-controller="bargraph" style="margin-top: 150px">
-
-
-        <md-card>
-            <md-card-header>
-                <canvas id="mycanvas" style="width: 500px;height: 300px"></canvas>
-
-            </md-card-header>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline" align="center">Average temperature comparision</span>
-                </md-card-title-text>
-            </md-card-title>
-
-        </md-card>
-
-
-    </div>
-
-
-
-    <div class="col-md-12"  ng-controller="pie" style="margin-top: 150px">
-
-
-        <md-card>
-            <md-card-header>
-                <canvas id="Polar" style="width: 500px;height: 300px"></canvas>
-            </md-card-header>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline" align="center">Average temperature comparision</span>
-                </md-card-title-text>
-            </md-card-title>
-
-        </md-card>
-
-    </div>
-
-
-    <div class="col-md-12" ng-controller="density" style="margin-top: 150px">
-        <md-card>
-            <md-card-header>
-                <canvas id="bubbles" style="width: 500px;height: 300px"></canvas>
-            </md-card-header>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline" align="center">Min-Max Temperature Comparision</span>
-                </md-card-title-text>
-            </md-card-title>
-
-        </md-card>
 
 
     </div>
-
-
-<div class="col-md-12 "  ng-controller="web" style="margin-top: 160px">
-    <md-card>
-        <md-card-header>
-            <canvas id="Radar" style="width: 500px;height: 300px"></canvas>
-        </md-card-header>
-        <md-card-title>
-            <md-card-title-text>
-                <span class="md-headline" align="center">Change in temperature</span>
-            </md-card-title-text>
-        </md-card-title>
-
-    </md-card>
+    <br />
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="text-align:center;"><b>Number of sensors in cities</b></span>
+  </div>
 
 </div>
 
 
+
+  </div>
+
+
+
+<div class="row">
+<div class="col-md-4 col-md-offset-3" >
+  <div class="graph1 " style="width:420px;height:320px;">
+
+  <div class="col-md-12" style="margin-top: 150px">
+
+
+       <canvas id="myChart3" width="200" height="200"></canvas>
+<script>
+var ctx3 = document.getElementById("myChart3");
+var myChart3 = new Chart(ctx3, {
+    type: 'line',
+    data: {
+        labels: [<% for(i in records4){ %>
+                                   "<%- records4[i].city %>",
+                                <%  } %>],
+        datasets: [{
+            label: 'Minimum temperature last week',
+            data: [<% for(i in records4){ %>
+                                   "<%- records4[i].min %>",
+                                <%  } %>],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)'
+               
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+                
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+
+    </div>
+
 </div>
+</div>
+<div style="float:right;padding-right:1cm;" >
+<div class="col-md-4 col-md-offset-7">
+  <div class="graph1" style="width:420px;height:320px;float:right;">
+
+  <div class="col-md-12" style="margin-top: 150px">
+
+
+       <canvas id="myChart4" width="200" height="200"></canvas>
+<script>
+var ctx4 = document.getElementById("myChart4");
+var myChart4 = new Chart(ctx4, {
+    type: 'line',
+    data: {
+        labels: [<% for(i in records4){ %>
+                                   "<%- records4[i].city %>",
+                                <%  } %>],
+        datasets: [{
+            label: 'Maximum temperature last week',
+            data: [<% for(i in records4){ %>
+                                   "<%- records4[i].max %>",
+                                <%  } %>],
+            backgroundColor: [
+                '#aae2d5'
+               
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+                
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+
+    </div>
+
+</div>
+</div>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+
+</div>
+
+<div class="row">
+
+<div class="col-md-4 col-md-offset-7">
+  <div class="graph1" style="width:820px;height:420px;float:right;">
+
+  <div class="col-md-12" style="margin-top: 150px">
+
+
+       <canvas id="myChart5" width="800" height="400"></canvas>
+<script>
+var ctx5 = document.getElementById("myChart5");
+var myChart5 = new Chart(ctx5, {
+    type: 'line',
+    data: {
+        labels: [<% for(i in records4){ %>
+                                   "<%- records4[i].city %>",
+                                <%  } %>],
+        datasets: [{
+            label: 'Average temperature last week',
+            data: [<% for(i in records4){ %>
+                                   "<%- records4[i].avg %>",
+                                <%  } %>],
+            backgroundColor: [
+                '#aae2d5'
+               
+            ],
+            borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)'
+                
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero:true
+                }
+            }]
+        }
+    }
+});
+</script>
+
+
+    </div>
+
+</div>
+</div>
+
+</div>
+
   </body>
 </html>

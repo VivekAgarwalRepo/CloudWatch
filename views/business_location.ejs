@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <h1>Success</h1>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+ </head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<body>
+<div id="header"></div>
+<script type="text/javascript" src="./js/business_header.js"></script>
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align:center;">Create Sensor</h4>
+        </div>
+<div class="modal-body">
+          <form action="/createSensor" method="post">
+<div class="form-group">
+<div class="input-group">
+            <span class="input-group-addon" id="sensor_name"><b>Sensor Name</b></span><input type="text" name="sensor_name" placeholder="Sensor Name" class="form-control" required> <br />
+</div> <br />
+
+<div class="input-group">
+            <span class="input-group-addon" id="location"><b>Location</b></span>
+             <input type="text" name="location" placeholder="Location" class="form-control" required> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="active"><b>Active</b></span>
+             <select name="active" class="form-control" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="type"><b>Sensor Type</b></span>
+             <input type="text" name="type" placeholder="Sensor Type" class="form-control" required> <br /> </div><br />
+            <input type="submit" value="Create" class="btn btn-info center-block" style="background: #1abc9c; width=80px;">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+ 
+<div class="col-md-6 col-md-offset-3">
+<div name="map_nayan">
+  
+   <script src='https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyB-7U6qTUfJE-_NBItfrn81VTRM3ZPrLKA'>
+
+        </script>
+        <div style='overflow:hidden;height:500px;width:800px;'>
+            <div class="col-md-12" id='gmap_canvas' style='height:500px;width:800px;'>
+
+            </div><style>
+                #gmap_canvas img{max-width:none!important;background:none!important}
+            </style></div> <a href='https://addmap.net/'>https://addmap.net</a>
+        <script type='text/javascript' src='https://embedmaps.com/google-maps-authorization/script.js?id=1f4edbca13e40906b40b73f6869d3a7e1e6e9b47'>
+
+        </script>
+        <script type='text/javascript'>
+            function init_map()
+            {
+                var myOptions =
+                {
+                    zoom:15,
+                    center:new google.maps.LatLng('<%= myresult[5].sensor_x %>','<%= myresult[5].sensor_y %>'),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+
+
+                <%for (i in myresult){%>
+
+                marker = new google.maps.Marker({
+                    map: map,
+                    position: new google.maps.LatLng('<%= myresult[i].sensor_x %>','<%= myresult[i].sensor_y %>')
+                });
+                // infowindow = new google.maps.InfoWindow({
+                //     content:'<%= myresult[i].placename %>'
+                // });
+                <% } %>
+                google.maps.event.addListener(marker, 'click',
+                        function(){
+                            infowindow.open(map,marker);
+                        });
+                infowindow.open(map,marker);
+            }
+            google.maps.event.addDomListener(window, 'load', init_map);
+
+
+        </script>
+
+</div>
+</div>div>
+  </body>
+</html>

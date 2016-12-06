@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Analysis</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+ </head>
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<body>
+  <div id="header"></div>
+<script type="text/javascript" src="./js/business_header.js"></script>
+  <div class="main">
+<div class="container-fluid">
+
+<h1 style="text-align:center;"> Analysis </h1> <hr /> <br />
+<form method="POST" action="/query">
+<div class="input-group">
+            <span class="input-group-addon" id="query">Query
+            </span>
+            <input type="text" name="query" placeholder="Enter Query" class="form-control"  required> <br />
+            
+        
+
+</div><br />
+<span style="color:red;">  <%= message %></span><br /> <br />
+<%= display %>
+<input type="submit" value="Submit" class="btn btn-info center-block" style="background: #1abc9c; width:150px;">
+</form>
+
+    
+  
+  
+</div>
+
+</div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align:center;">Create Sensor</h4>
+        </div>
+<div class="modal-body">
+          <form action="/createSensor" method="post">
+<div class="form-group">
+<div class="input-group">
+            <span class="input-group-addon" id="sensor_name"><b>Sensor Name</b></span><input type="text" name="sensor_name" placeholder="Sensor Name" class="form-control" required> <br />
+</div> <br />
+
+            <span class="input-group-addon" id="longitude"><b>Longitude</b></span>
+             <input type="text" name="longitude" placeholder="Longitude" class="form-control" required> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="location"><b>Location</b></span>
+             <input type="text" name="location" placeholder="Location" class="form-control" required> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="active"><b>Active</b></span>
+             <select name="active" class="form-control" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="type"><b>Sensor Type</b></span>
+             <input type="text" name="type" placeholder="Sensor Type" class="form-control" required> <br /> </div><br />
+            <input type="submit" value="Create" class="btn btn-info center-block" style="background: #1abc9c; width=80px;">
+        </div> </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+  <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align:center;">Create Sensor</h4>
+        </div>
+<div class="modal-body">
+          <form action="/createSensor" method="post">
+<div class="form-group">
+<div class="input-group">
+            <span class="input-group-addon" id="sensor_name"><b>Sensor Name</b></span><input type="text" name="sensor_name" placeholder="Sensor Name" class="form-control" required> <br />
+</div> <br />
+
+<div class="input-group">
+            <span class="input-group-addon" id="location"><b>Location</b></span>
+             <input type="text" name="location" placeholder="Location" class="form-control" required> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="active"><b>Active</b></span>
+             <select name="active" class="form-control" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+            </select> <br /></div><br />
+<div class="input-group">
+            <span class="input-group-addon" id="type"><b>Sensor Type</b></span>
+             <input type="text" name="type" placeholder="Sensor Type" class="form-control" required> <br /> </div><br />
+            <input type="submit" value="Create" class="btn btn-info center-block" style="background: #1abc9c; width:80px;">
+        </div> </form>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+      </div>
+
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+ 
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title" style="text-align:center;">Search</h4>
+        </div>
+        <div class="modal-body">
+          <form action="/search" method="post">
+          <div class="input-group">
+            <span class="input-group-addon" id="search"> <i class="fa fa-search"></i></span>
+          <input type="text" name="search" placeholder="Search" class="form-control" required> 
+        </div>
+        <br /> <br />
+        <input type="submit" value="Search" class="btn btn-info center-block" style="background: #1abc9c; width:150px;">
+      </form>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+  </body>
+</html>

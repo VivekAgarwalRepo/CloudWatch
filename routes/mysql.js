@@ -10,6 +10,11 @@ exports.add=function add(callback,query){
 		  	if(err)	{
 		  		console.log("ERROR: " + err.message);
 		  	}
+		  	else 
+		{	
+			console.log("Results:"+rows);
+			callback(err, rows);
+		}
 		  });
 		  pool.onReturnConnection(pooler);
 };
