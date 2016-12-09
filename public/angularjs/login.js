@@ -366,6 +366,7 @@ app.controller('line',function ($scope,$http,$timeout) {
 				rvalues=["56","52","57","63","58","60","61"]
 
 
+
 				myLineChart.data.labels.push(new Date(Date.now()).toISOString().slice(0,21));
 				myLineChart.data.datasets[0].label.push(cities[i]);
 				myLineChart.data.datasets[0].data.push(rvalues[i]);

@@ -223,7 +223,8 @@ exports.signup_page= function (req,res) {
 };
 
 exports.business_check_validate= function (req,res) {
-	
+
+
 	console.log("req.param.dashboard"+req.param('dashboard'));
 	console.log("req.param.dashboard"+req.param('active_sensors'));
 

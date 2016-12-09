@@ -30,16 +30,6 @@ document.getElementById('header').innerHTML= '<div class="nav-side-menu">'+
                   '</li>'+
 
 
-
-                '<li data-toggle="collapse" data-target="#service" class="collapsed">'+
-                  '<a href="/business_create"><i class="fa fa-check fa-lg"></i> Add sensor </a>'+
-                '</li> '+
-
-                '<li data-toggle="collapse" data-target="#service" class="collapsed">'+
-                  '<a href="/business_purchase"><i class="fa fa-check fa-lg"></i> Purchase Services </a>'+
-                '</li> '+
-
-
                 '<li data-toggle="collapse" data-target="#service" class="collapsed">'+
                   '<a href="/business_bill"><i class="fa fa-money fa-lg"></i> View Latest Bill </a>'+
                 '</li> '+

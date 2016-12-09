@@ -1,11 +1,9 @@
-
-
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="5de644c6-a95c-49a8-a53a-384c75f87a77" name="CloudWatch" url="http://ec2-35-163-212-84.us-west-2.compute.amazonaws.com">
-        <fileTransfer host="ec2-35-163-212-84.us-west-2.compute.amazonaws.com" port="22" privateKey="C:\Users\Vivek Agarwal\Desktop\cloudwatch.pem" accessType="SFTP" keyPair="true">
+      <webServer id="2dd59ca6-62d8-4a93-a58d-3ef7e23b6cbe" name="CloudWatch AWS" url="http://35.163.212.84">
+        <fileTransfer host="35.163.212.84" port="22" privateKey="C:\Users\Vivek Agarwal\Desktop\cloudwatch.pem" accessType="SFTP" keyPair="true">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
           </advancedOptions>

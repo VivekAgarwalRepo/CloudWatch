@@ -18,7 +18,7 @@ var app = express();
 
 //all environments
 
-app.set('port', process.env.PORT || 3018);
+app.set('port', process.env.PORT || 3020);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -94,6 +94,7 @@ app.post('/business_signup',business.signup);
 app.get('/business_signup_page',business.signup_page);
 app.post('/business_check_validate',business.business_check_validate);
 app.get('/business_create',business.create);
+
 
 app.get('/business_bill',business.bill);
 
