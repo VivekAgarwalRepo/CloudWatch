@@ -41,7 +41,7 @@ document.getElementById('header').innerHTML= '<div class="nav-side-menu">'+
                 '</li>'+
 
                  '<li data-toggle="collapse" data-target="#new" class="collapsed">'+
-                  '<a href="/business"><i class="fa fa-money fa-lg"></i> View Businesses</a>'+
+                  '<a href="/a_business"><i class="fa fa-money fa-lg"></i> View Businesses</a>'+
                 '</li>'+
 
                  '<li>'+

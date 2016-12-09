@@ -55,17 +55,17 @@ exports.query = function(req,res){
 		
 	},query);
 }
-else
-{
-	res.render('business_query', { title: 'Analysis',message: "Enter only SELECT query",display:"Tables present are sensor_register and testtable"});
-}
+	else
+	{
+		res.render('business_query', { title: 'Analysis',message: "Enter only SELECT query",display:"Tables present are sensor_register and testtable"});
+	}
 
-
-	};
+};
 
 exports.dashboard = function(req, res){
 	var username=req.param("username");
 	var password=req.param("password");
+
 	console.log(username);
 	console.log(password);
 	var first,message,last;
@@ -82,7 +82,8 @@ exports.dashboard = function(req, res){
 			  }
 			else
 				{
-				
+
+					req.session.username=username;
 				first = records[0].first;
 				last = records[0].last;
 				req.session.first=first;
@@ -169,8 +170,55 @@ exports.signup= function (req,res) {
 	},create_business);
 };
 
+exports.live=function (req,res) {
+	var query="select live.timestamp,live.temperature, live.humidity, live.city from live,latestentry where live.timestamp=latestentry.latest order by timestamp asc;";
+
+	mysql1.get(function (err,rows) {
+		if(err){
+			console.error(err)
+		}
+		else{
+			res.send(rows);
+		}
+	},query);
+
+}
+
+exports.average=function (req,res) {
+	var query="select *,((min+max)/2) as avg from citywise;";
+	mysql1.get(function (err,rows) {
+		if(err){
+			console.error(err)
+		}
+		else{
+			res.send(rows);
+		}
+	},query);
+}
+
+exports.avgHumid=function (req,res) {
+	var query="select *,(minhumid+maxhumimd)/2 as avghumid from citywisehumid;";
+	mysql1.get(function (err,rows) {
+		if(err){
+			console.error(err)
+		}
+		else{
+			res.send(rows);
+		}
+	},query);
+}
+
+exports.bill=function (req,res) {
+	query="Select * from business where username = '"+req.session.username+"';";
+
+	mysql1.get(function (err,results) {
+		console.log("Billing results :"+JSON.stringify(results));
+		res.render('business_bill',{services:results[0]});
+	},query);
+
+}
+
 exports.signup_page= function (req,res) {
-	
 	res.render('business_signup');
 };
 
@@ -178,6 +226,23 @@ exports.business_check_validate= function (req,res) {
 	
 	console.log("req.param.dashboard"+req.param('dashboard'));
 	console.log("req.param.dashboard"+req.param('active_sensors'));
+
+	var dash=req.param('dashboard');
+	var active=req.param('active_sensors');
+	var extensive=req.param('extensive_analysis');
+	var search=req.param('search_details');
+
+
+	query="UPDATE business as set dashboard=?,actve_sensors=?,extensive_analysis=?,sensor_details=? where email=?"
+	mysql1.add(function (err,result) {
+		if(err){
+			throw err;
+		}
+		else{
+			res.redirect('/business_validation');
+		}
+	},create_business);
+
 	res.redirect('/business_home');
 };
 

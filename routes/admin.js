@@ -194,9 +194,11 @@ exports.dashboard = function(req, res){
 				  console.log(message);
 				  res.render('signin', { title: 'Sign in', message:message});
 			  }
+
 			else
 				{
 					res.redirect('/dash');
+
 		// 			first = records[0].first;
 		// 		last = records[0].last;
 		// 		req.session.first=first;
@@ -414,5 +416,71 @@ console.log("inside business");
 	},query);
 
 
+
+}
+//
+// exports.enterVals=function (req,res) {
+// 	var id=req.param("sensor_id");
+// 	var temp=req.param("sensor_temp");
+// 	var humid=req.param("sensor_humidity");
+//
+// 	console.log("id :"+id+" temp :"+temp+" humidity :"+humid);
+//
+// 	var query= "Insert into testtable(sensor_id,sensor_temp,sensor_humidity) values ("+id+","+temp+","+humid+");";
+// 	mysql1.get(function(err,records){
+// 		if(err){
+// 			throw err;
+// 		}
+// 		else
+// 		{
+// 			res.send(records);
+//
+// 		}
+//
+// 	},query);
+//
+// }
+
+exports.MapToVirtualSensor=function (req,res) {
+	var id=req.param("sensor_id");
+	var temp= [];
+	var humidity = [];
+	temp[0]=req.param("temp1");
+	humidity[0]=req.param("humidity1");
+	temp[1]=req.param("temp2");
+	humidity[1]=req.param("humidity2");
+	temp[2]=req.param("temp3");
+	humidity[2]=req.param("humidity3");
+	var aggregated_temp=0;
+	var aggregated_humidity=0;
+	for(var i=0;i<3;i++)
+	{
+		var k=i+1;
+		if(i==2)
+		{
+			k = 0;
+		}
+		if(humidity[i] == humidity[k])
+			aggregated_humidity = humidity[i];
+		if(temp[i] == temp[k])
+			aggregated_temp = temp[i];
+	}
+	if(aggregated_temp == 0)
+		aggregated_temp = temp[0];
+	if(aggregated_humidity == 0)
+		aggregated_humidity = humidity[0];
+
+	console.log("id :"+id+" temp :"+aggregated_temp+" humidity :"+aggregated_humidity);
+
+	var query= "Insert into testtable(sensor_id,sensor_temp,sensor_humidity,timestamp) values ("+id+","+aggregated_temp+","+aggregated_humidity+","+new Date(Date.now())+");";
+	mysql1.get(function(err,records){
+		if(err){
+			throw err;
+		}
+		else
+		{
+			res.send(records);
+		}
+	},query);
 
 }

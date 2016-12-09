@@ -1,10 +1,13 @@
 //loading the 'login' angularJS module
 var app = angular.module('login', []);
 //defining the login controller
+
 app.controller('login', function($scope, $http) {
+
 	//Initializing the 'invalid_login' and 'unexpected_error' 
 	//to be hidden in the UI by setting them true,
 	//Note: They become visible when we set them to false
+
 	$scope.invalid_login = true;
 	$scope.unexpected_error = true;
 	$scope.submit = function() {
@@ -31,362 +34,352 @@ app.controller('login', function($scope, $http) {
 	};
 })
 
-
 app.controller('bargraph',function ($scope,$http) {
 
 
+	$http({
+		url:"/avg",
+		method:"GET"
+	}).success(function (data) {
 
-	var ctx = document.getElementById("mycanvas").getContext("2d");
-	var myChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: ["San Fransisco", "San Jose", "Vegas", "Los Angeles", "San Diego"],
+		var labels=[];
+		var vals=[];
 
-			datasets: [{
-				label: 'Average Temperature (Fahrenheit)',
-				data: [12, 19, 3, 5, 2],
-				backgroundColor: [
-					'rgba(255, 99, 132, 0.2)',
-					'rgba(54, 162, 235, 0.2)',
-					'rgba(255, 206, 86, 0.2)',
-					'rgba(75, 192, 192, 0.2)',
-					'rgba(153, 102, 255, 0.2)',
+		for(i in data)
+		{
+			labels.push(data[i].city);
+			vals.push(data[i].avg);
+		}
 
-				],
-				borderColor: [
-					'rgba(255,99,132,1)',
-					'rgba(54, 162, 235, 1)',
-					'rgba(255, 206, 86, 1)',
-					'rgba(75, 192, 192, 1)',
-					'rgba(153, 102, 255, 1)',
-				],
-				borderWidth: 1,
-				hoverBackgroundColor: "#B0E0E6"
-			}]
-		},
-		options: {
-			scales: {
-				yAxes: [{
-					ticks: {
-						beginAtZero:true
-					},
-					gridLines:{
-						drawOnChartArea:false
+
+		var ctx = document.getElementById("mycanvas").getContext("2d");
+		var myChart = new Chart(ctx, {
+			type: 'bar',
+			data: {
+
+				labels: labels,
+
+				datasets: [{
+					label: "Average Temperature",
+					data: vals,
+					backgroundColor: [
+						'rgba(255, 99, 132, 0.2)',
+						'rgba(54, 162, 235, 0.2)',
+						'rgba(255, 206, 86, 0.2)',
+						'rgba(75, 192, 192, 0.2)',
+						'rgba(153, 102, 255, 0.2)',
+
+					],
+					borderColor: [
+						'rgba(255,99,132,1)',
+						'rgba(54, 162, 235, 1)',
+						'rgba(255, 206, 86, 1)',
+						'rgba(75, 192, 192, 1)',
+						'rgba(153, 102, 255, 1)',
+					],
+					borderWidth: 1,
+					hoverBackgroundColor: "#B0E0E6"
+				}]
+			},
+			options: {
+				scales: {
+					yAxes: [{
+						ticks: {
+							beginAtZero:true
+						},
+						gridLines:{
+							drawOnChartArea:false
+						}
 					}
-				}
-				],
-				xAxes: [{
-					gridLines:{
-						drawOnChartArea:false
+					],
+					xAxes: [{
+						gridLines:{
+							drawOnChartArea:false
+						}
 					}
-				}
-				],
+					],
+
+				},
+
 
 			},
 
 
-		},
+		});
 
 
-	});
+	})
+
+
 })
 
 
 app.controller('density',function ($scope,$http) {
-	var data = {
 
-		datasets: [
-			{
-				label: 'San Fransisco',
 
-				data: [
-					{
-						x: 20,
-						y: 30,
-						r: 15
-					}
+	$http({
+		"url":"/avg",
+		"method":"GET"
+	}).success(function (data) {
+		var labels=[];
+		var dataset=[];
+		for (i in data){
+			labels.push(data[i].city);
 
-				],
+			dataset.push({
+				label:data[i].city,
+				data:[{x:data[i].min,y:data[i].max,r:25}],
 				backgroundColor:"#B0E0E6",
-				hoverBackgroundColor: "White",
-			},
-			{
-				label: 'San Jose',
-				data: [
-					{
-						x: 40,
-						y: 40,
-						r: 25
+				hoverBackgroundColor: "White"
+			})
+		}
+
+
+		var data = {
+
+			datasets: dataset
+		};
+
+		var bub = document.getElementById("bubbles").getContext("2d");
+		var myBubbleChart = new Chart(bub,{
+			type: 'bubble',
+			data: data,
+			options: {
+				elements: {
+					points: {
+						borderWidth: 1,
+						borderColor: 'rgb(0, 0, 0)'
 					}
-
-				],
-				backgroundColor:"#7851A9",
-				hoverBackgroundColor: "White",
-			},
-			{
-				label: 'Vegas',
-				data: [
-					{
-						x: 30,
-						y: 50,
-						r: 15
-					}
-
-				],
-				backgroundColor:"#4169E1",
-				hoverBackgroundColor: "White",
-			},
-			{
-				label: 'Los Angeles',
-				data: [
-					{
-						x: 45,
-						y: 47,
-						r: 13
-					}
-
-				],
-				backgroundColor:"#2B60DE",
-				hoverBackgroundColor: "White",
-			},
-			{
-				label: 'San Diego',
-				data: [
-					{
-						x: 55,
-						y: 60,
-						r: 15
-					}
-
-				],
-				backgroundColor:"#002366",
-				hoverBackgroundColor: "White",
-			}]
-	};
-
-	var bub = document.getElementById("bubbles").getContext("2d");
-	var myBubbleChart = new Chart(bub,{
-		type: 'bubble',
-		data: data,
-		options: {
-			elements: {
-				points: {
-					borderWidth: 1,
-					borderColor: 'rgb(0, 0, 0)'
 				}
 			}
-		}
-	});
+		});
+	})
+
 })
 
 app.controller('pie',function ($scope,$http) {
-	var data = {
-		datasets: [{
-			data: [
-				11,
-				16,
-				7,
-				3,
-				14
-			],
-			backgroundColor: [
-				"#FF6384",
-				"#4BC0C0",
-				"#FFCE56",
-				"#E7E9ED",
-				"#36A2EB"
-			],
-			label: 'My dataset' // for legend
-		}],
-		labels: [
-			"San Fransisco",
-			"San Jose",
-			"Vegas",
-			"Los Angeles",
-			"San Diego"
-		]
-	};
 
-	var pol = document.getElementById("Polar").getContext("2d");
+	$http({
+		"url":"/avgHumid",
+		"method":"GET"
+	}).success(function (data) {
+		var labels=[];
+		var vals=[];
 
-	new Chart(pol, {
-		data: data,
-		type: 'polarArea',
-		options: {
-			elements: {
-				arc: {
-					borderColor: "#B0E0E6"
+		for(i in data)
+		{
+			labels.push(data[i].city)
+			vals.push(data[i].avghumid);
+		}
+
+		hlabel=labels;
+		hvals=vals;
+
+		var data = {
+			datasets: [{
+				data: vals,
+				backgroundColor: [
+					"#FF6384",
+					"#4BC0C0",
+					"#FFCE56",
+					"#E7E9ED",
+					"#36A2EB"
+				],
+				label: 'Average Humidity' // for legend
+			}],
+			labels: labels
+		};
+
+		var pol = document.getElementById("Polar").getContext("2d");
+
+		new Chart(pol, {
+			data: data,
+			type: 'polarArea',
+			options: {
+				elements: {
+					arc: {
+						borderColor: "#B0E0E6"
+					}
 				}
 			}
-		}
-	});
+		});
+
+	})
+
+
 })
 
 app.controller('web',function ($scope,$http) {
-	var data = {
-		labels: ["San Fransisco", "San Jose", "Vegas", "San Diego", "Los Angeles"],
-		datasets: [
-			{
-				label: "This Week",
-				backgroundColor: "rgba(179,181,198,0.2)",
-				borderColor: "rgba(179,181,198,1)",
-				pointBackgroundColor: "rgba(179,181,198,1)",
-				pointBorderColor: "#fff",
-				pointHoverBackgroundColor: "#fff",
-				pointHoverBorderColor: "rgba(179,181,198,1)",
-				data: [12, 19, 12, 5, 21]
-			},
-			{
-				label: "Last Week",
-				backgroundColor: "rgba(255,99,132,0.2)",
-				borderColor: "rgba(255,99,132,1)",
-				pointBackgroundColor: "rgba(255,99,132,1)",
-				pointBorderColor: "#fff",
-				pointHoverBackgroundColor: "#fff",
-				pointHoverBorderColor: "rgba(255,99,132,1)",
-				data: [15, 14,15, 9, 24]
-			}
-		]
-	};
-	var rad = document.getElementById("Radar").getContext("2d");
+	$http({
+		"url":"/avg",
+		"method":"GET"
+	}).success(function (data) {
+		var tlabels=[];
+		var tvals=[];
 
-	new Chart(rad, {
-		data: data,
-		type: 'radar',
-		options: {
-			elements: {
-				arc: {
-					borderColor: "#B0E0E6"
-				}
-			}
+		for(i in data)
+		{
+			tlabels.push(data[i].city);
+			tvals.push(data[i].avg);
 		}
+
+		$http({
+			url:"/avgHumid",
+			method:"GET"
+		}).success(function (data) {
+			var hlabels=[];
+			var hvals=[];
+
+
+			for(i in data)
+			{
+				hlabels.push(data[i].city)
+				hvals.push(data[i].avghumid);
+			}
+
+			var data = {
+				labels: tlabels,
+				datasets: [
+					{
+						label: "Average Temperature",
+						backgroundColor: "rgba(179,181,198,0.2)",
+						borderColor: "rgba(179,181,198,1)",
+						pointBackgroundColor: "rgba(179,181,198,1)",
+						pointBorderColor: "#fff",
+						pointHoverBackgroundColor: "#fff",
+						pointHoverBorderColor: "rgba(179,181,198,1)",
+						data: tvals
+					},
+					{
+						label: "Average Humidity",
+						backgroundColor: "rgba(255,99,132,0.2)",
+						borderColor: "rgba(255,99,132,1)",
+						pointBackgroundColor: "rgba(255,99,132,1)",
+						pointBorderColor: "#fff",
+						pointHoverBackgroundColor: "#fff",
+						pointHoverBorderColor: "rgba(255,99,132,1)",
+						data: hvals
+					}
+				]
+			};
+			var rad = document.getElementById("Radar").getContext("2d");
+
+			new Chart(rad, {
+				data: data,
+				type: 'radar',
+				options: {
+					elements: {
+						arc: {
+							borderColor: "#B0E0E6"
+						}
+					}
+				}
+			});
+
+
+		});
 	});
+
 
 })
 
-app.controller('line',function ($scope,$http) {
-	var data = {
-		labels: ["1:00", "1:01", "1:02", "1:03", "1:04", "1:05", "1:06"],
-		datasets: [
-			{
-				label: "San Fransisco",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "orange",
-				borderColor: "orange",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(75,192,192,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [65, 66, 63, 67, 64, 65, 66],
-				spanGaps: false,
-			},
-			{
-				label: "San Jose",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "grey",
-				borderColor: "dark grey",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(75,192,192,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [75,76, 74, 71, 73, 72, 75],
-				spanGaps: false,
-			},
-			{
-				label: "Vegas",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "Blue",
-				borderColor: "Blue",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(75,192,192,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [55,54, 57, 56, 53, 55, 57],
-				spanGaps: false,
-			},
-			{
-				label: "Los Angeles",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "Brown",
-				borderColor: "Brown",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(75,192,192,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [87,85, 84, 86, 83, 79, 80],
-				spanGaps: false,
-			},
-			{
-				label: "San Diego",
-				fill: false,
-				lineTension: 0.1,
-				backgroundColor: "Blue",
-				borderColor: "Light Blue",
-				borderCapStyle: 'butt',
-				borderDash: [],
-				borderDashOffset: 0.0,
-				borderJoinStyle: 'miter',
-				pointBorderColor: "rgba(75,192,192,1)",
-				pointBackgroundColor: "#fff",
-				pointBorderWidth: 1,
-				pointHoverRadius: 5,
-				pointHoverBackgroundColor: "rgba(75,192,192,1)",
-				pointHoverBorderColor: "rgba(220,220,220,1)",
-				pointHoverBorderWidth: 2,
-				pointRadius: 1,
-				pointHitRadius: 10,
-				data: [60,62, 64, 57, 59, 58, 61],
-				spanGaps: false,
-			},
+app.controller('line',function ($scope,$http,$timeout) {
 
-		]
-	};
+	var labels=[];
+	var vals=[];
+	var city=[];
 
-	var rad = document.getElementById("line").getContext("2d");
+		$http({
+			url:'/liveFeed',
+			method:"GET"
+		}).success(function (rows) {
 
-	var myLineChart = new Chart(rad, {
-		type: 'line',
-		data: data
-	});
+			// alert(JSON.stringify(rows));
+
+			for(i in rows) {
+				labels.push(rows[i].timestamp);
+				vals.push(rows[i].temperature);
+				city.push(rows[i].city);
+                //
+				// if(vals[i]==undefined)
+				// 	for(j in rows)
+				// 		vals[j]=[]
+                //
+				// if(vals[i]!=undefined)
+				// 	vals[i].push(rows[i].temperature+vals[i]);
+                //
+                //
+				// if (vals[i].length > 5)
+				// 	vals[i].splice(0, 1);
+                //
+				// if(labels.length>5)
+				// 	labels.splice(0,1);
+                //
+				// datasets[i] = {
+				// 	label: rows[i].city,
+				// 	backgroundColor: "red",
+				// 	// borderColor: "orange",
+				// 	data: vals[i],
+				// }
+			}
+
+
+
+			var data = {
+				labels:labels,
+				datasets: [{
+					label:city,
+					backgroundColor: "red",
+					borderColor: "orange",
+					data: vals,
+				}]
+			};
+
+			var rad = document.getElementById("line").getContext("2d");
+
+			var myLineChart = new Chart(rad, {
+				type: 'bar',
+				data: data,
+				options: {
+					scales: {
+						yAxes: [{
+							ticks: {
+								beginAtZero:true
+							}
+						}]
+					}
+				}
+			});
+
+			latestLabel=["A","B","C","D","E"]
+
+			var i=0;
+			setInterval(function(){
+				// // Add two random numbers for each dataset
+				// myLineChart.addData([Math.random() * 100, Math.random() * 100], ++latestLabel);
+				// // Remove the first point so we dont just add values forever
+				// myLineChart.removeData();
+				cities=["Palo Alto","Cupertino","Mountain View","San Pedro","Zanker Road","Tasman","Japantown"]
+
+				times=["2016-12-08 10:34:12","2016-12-08 10:35:12","2016-12-08 10:36:12","2016-12-08 10:37:12","2016-12-08 10:38:12","2016-12-08 10:39:12","2016-12-08 10:40:12"]
+
+				rvalues=["56","52","57","63","58","60","61"]
+
+
+				myLineChart.data.labels.push(new Date(Date.now()).toISOString().slice(0,21));
+				myLineChart.data.datasets[0].label.push(cities[i]);
+				myLineChart.data.datasets[0].data.push(rvalues[i]);
+
+				myLineChart.data.labels.splice(0,1);
+				myLineChart.data.datasets[0].label.splice(0,1);
+				myLineChart.data.datasets[0].data.splice(0,1);
+
+				i++;
+				if(i>6)
+					i=0;
+				myLineChart.update();
+			}, 3000);
+
+		});
 
 })

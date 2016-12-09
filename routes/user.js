@@ -14,9 +14,11 @@ exports.setcurrentlocation= function (req,res) {
 };
 
 exports.getweather= function(req,res){
+	console.log("Reached Getweather");
 	res.set('Access-Control-Allow-Origin', '*');
 	var latitude= req.param('latitude');
 		var longitude= req.param('longitude');
+
 		console.log(latitude+","+longitude);
 		req.session.cur_latitude= latitude;
 		req.session.cur_longitude= longitude;
@@ -57,6 +59,7 @@ exports.getweather= function(req,res){
 			}
 			console.log("min"+mindist);
 			console.log("sensor id="+items[minpos].sensor_location);
+			console.log("minpos :"+minpos);
 			var response={};
 			var location= items[minpos].sensor_location;
 			response.location= location;
@@ -64,7 +67,7 @@ exports.getweather= function(req,res){
 			console.log(query);
 			mysql.get(function (err,result) {
 				if(err){
-					throw err;
+					console.error(err);
 				}
 				else{
 					console.dir(result);
@@ -90,6 +93,7 @@ exports.showweather= function (req,res) {
 
 exports.getweatherbyloc= function (req,res) {
 	res.set('Access-Control-Allow-Origin', '*');
+	var response={};
 	var location = req.param('location');
 	console.log("location="+location);
 	var query= "SELECT * FROM sensor_register WHERE sensor_location like '%"+location+"%';"
@@ -97,14 +101,15 @@ exports.getweatherbyloc= function (req,res) {
 	console.log(query);
 	mysql.get(function(err,result){
 		if(err){
-			throw err;
+			console.log("MySQL error as "+err);
 		}
 		else{
 			console.log("result= "+result);
 			items= result;
+
 			response.location= location;
-			console.log(items.sensor_id);
-			var query1= "SELECT * FROM testtable WHERE sensor_id= '"+items.sensor_id+"';";
+			console.log(items[items.length-1].sensor_id);
+			var query1= "SELECT * FROM testtable WHERE sensor_id= '"+items[items.length-1].sensor_id+"';";
 			console.log(query1);
 			mysql.get(function (err,result) {
 				if(err){
